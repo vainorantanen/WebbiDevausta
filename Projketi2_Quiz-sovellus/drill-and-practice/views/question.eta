@@ -1,0 +1,47 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Question: <%= it.data.question_text %></h1>
+
+<p>Add an answer option:</p>
+<form method="POST" action="/topics/<%= it.data.topic_id %>/questions/<%= it.data.id %>/options">
+    Text here: <br/>
+    <textarea name="option_text"></textarea><br/>
+    Check the box this is a correct answer:<br/>
+    <input type="checkbox" name="is_correct"/><br/>
+    <input type="submit" value="Submit"/>
+</form>
+
+<% if (it.validationErrors) { %>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+<p>Existing answer options:</p>
+
+<% if (it.qaodata && it.qaodata.length > 0) { %>
+    <ul>
+        <% it.qaodata.forEach((qao) => { %>
+            <li>
+                <%= qao.option_text %>, <%= qao.is_correct %>
+                <form method="POST" action="/topics/<%= it.data.topic_id %>/questions/<%= it.data.id %>/options/<%= qao.id %>/delete">
+                <input type="submit" value="Delete option"/>
+                </form>
+
+            </li>
+        <% }); %>
+
+    </ul>
+<% } else { %>
+    <p>No options</p>
+    <p>Want to delete this question?</p>
+    <form method="POST" action="/topics/<%= it.data.topic_id %>/questions/<%= it.data.id %>/delete">
+        <input type="submit" value="Delete question"/>
+    </form>
+
+<% } %>
+

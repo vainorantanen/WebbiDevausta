@@ -1,0 +1,36 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Topic: <%= it.topic.name %></h1>
+
+<p>Add a question to this topic:</p>
+<form method="POST" action="/topics/<%= it.topic.id %>/questions">
+    Write the question here: <br/>
+    <textarea name="question_text"></textarea><br/>
+    <input type="submit" value"Submit"/>
+</form>
+
+<% if (it.validationErrors) { %>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+<p>Questions regarding this topic:</p>
+
+<% if (it.questionsInTopic && it.questionsInTopic.length > 0) { %>
+
+<ul>
+        <% it.questionsInTopic.forEach((question) => { %>
+            <li>
+                <a href="/topics/<%= it.topic.id %>/questions/<%= question.id %>"><%= question.question_text %></a>
+            </li>  
+        <% }) %>
+        
+    </ul>
+
+
+<% } %>

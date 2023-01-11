@@ -1,0 +1,13 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Incorrect!</h1>
+<a href="/quiz/<%= it.data %>">Next question</a>
+
+<h2>The right answer(s):</h2>
+<ul>
+    <% it.correct.forEach((word) => { %>
+        <li>
+        <%= word %>
+        </li>
+    <% }); %>
+</ul>

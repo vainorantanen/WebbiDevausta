@@ -1,0 +1,46 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Topics</h1>
+
+<ul>
+    <% it.topics.forEach((topic) => { %>
+        <li>
+            <a href="/topics/<%= topic.id %>"><%= topic.name %></a>
+            <% if (it.adminstate == 1) { %>
+                <form method="POST" action="/topics/<%= topic.id %>/delete">
+                <input type="submit" value="Delete"/>
+            </form> 
+            <% } %>
+            
+        </li>
+    <% }); %>
+
+</ul>
+
+
+
+<% if (it.adminstate == true) { %>
+    <p>Hi Admin! Add a topic:</p>
+    <form method="POST" action="/topics">
+        Topic name:<br/>
+        <input type="text" name="name" /><br/>
+    <input type="submit" value="Add!"/>
+</form>
+<% } %>
+
+
+<% if (it.validationErrors) { %>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+
+
+
+
+

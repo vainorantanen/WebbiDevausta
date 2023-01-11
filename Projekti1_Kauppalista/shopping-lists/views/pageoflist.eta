@@ -1,0 +1,34 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1><%= it.listtitle.name %></h1>
+<a href="/lists">Shopping lists</a>
+
+<h2>Add an item to the shopping list!</h2>
+
+<form method="POST" action="/lists/<%= it.listtitle.id %>/items">
+    <input type="text" name="name"/>
+    <input type="submit" value="Add an item!"/>
+</form>
+
+<% if (it.listitems !== false) { %>
+    <ul>
+    <% it.listitems.forEach((item) => { %>
+        
+        <% if (item.collected == false) { %>
+            <li>
+                <%= item.name %>
+                <form method="POST" action="/lists/<%= it.listtitle.id %>/items/<%= item.id %>/collect">
+                    <input type="submit" value="Mark collected!"/>
+                </form>
+            </li>
+        <% } else { %>
+            <li>
+                <del><%= item.name %></del>
+            </li>
+        <% } %>
+
+    <% }); %>
+    </ul>
+<% } else { %>
+    <h2>No items on the list!</h2>
+<% } %>

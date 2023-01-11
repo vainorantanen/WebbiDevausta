@@ -1,0 +1,20 @@
+<% layout("./layouts/layout.eta") %>
+
+<% if (it.questionerror) { %>
+    <p>There are no questions at the moment for this topic</p>
+<% } else { %>
+    <p>Question:</p>
+    <%= it.questiondata.question_text %>
+    <ul>
+        <% it.answeroptiondata.forEach((answeroption) => { %>
+            <li>
+                <%= answeroption.option_text %>
+                <form method="POST" action="/quiz/<%= it.questiondata.topic_id %>/questions/<%= it.questiondata.id %>/options/<%= answeroption.id %>">
+                    <input type="submit" value="Choose"/>
+                </form>
+            </li>
+        <% }); %>
+
+    </ul>
+<% }; %>
+

@@ -1,0 +1,18 @@
+<% layout("./layouts/layout.eta") %>
+
+<h2>Multiple choice questions applicaiton</h2>
+
+<p>In this applicaiton you can test your knowledge with multiple choice questions.</p>
+<p>You can use the application to e.g. studying for upcoming exams</p>
+<p>You can create your own questions on certain topics and even provide answer options to these questions!</p>
+
+<h3>Statistics:</h3>
+<p>Total number of topics: <%= it.noftopics %></p>
+<p>Number of questions: <%= it.nofqs %></p>
+<p>Number of answers: <%= it.nofanswers %></p>
+
+<p>Not jet registered? <a href="/auth/register">Register here!</a></p>
+
+<p>Already registered? <a href="/auth/login">Login!</a></p>
+
+<a href="/topics">Go to topics!</a>
