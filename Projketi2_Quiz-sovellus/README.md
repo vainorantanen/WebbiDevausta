@@ -1,11 +1,3 @@
-# Project 2: Question application
-
-Write the documentation of your project here. Do not include your personal
-details (e.g. name or student number).
-
-Remember to include the address of the online location where your project is
-running as it is a key part of the submission.
-
 This project provides you with a multiple choice questions application.
 The application consists of 4 main parts: topics, questions, question answer options and the quiz
 -Admin can create and remove whole topics.
